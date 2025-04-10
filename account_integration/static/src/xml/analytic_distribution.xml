@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="analytic.AnalyticDistributionPopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('analytic_distribution_popup')]" position="attributes">
+            <attribute name="style">width: auto;</attribute>
+        </xpath>
+
+        <xpath expr="//th[hasclass('o_analytic_account_name')]" position="after">
+            <th class="o_analytic_product"> </th>
+            <th class="o_analytic_amount"> </th>
+            <th class="o_analytic_percentage"> </th>
+            <th></th>
+        </xpath>
+
+        <xpath expr="//td[hasclass('o_analytic_account_name')]" position="after">
+            <td class="o_analytic_product" style="width: 200px;">
+                <AutoComplete
+                    id="dist_tag.id.toString()"
+                    placeholder="'Search Product'"
+                    value="dist_tag.analytic_product_name"
+                    sources="sourcesProductTemplate(plan.id)"
+                    autoSelect="true"
+                    onSelect.alike="(option, params) => this.onSelectProduct(option, params, dist_tag)"
+                    onChange.alike="({inputValue}) => this.autoCompleteInputChanged(dist_tag, inputValue)"/>
+            </td>
+            <td class="o_analytic_amount" style="width: 120px;">
+                <input
+                    class="o_input"
+                    inputmode="numeric"
+                    type="text"
+                    placeholder="Amount"
+                    t-att-value="dist_tag.amount || ''"
+                    t-on-click.stop=""
+                    t-on-change="(ev) => this.amountChanged(dist_tag, ev)"/>
+            </td>
+        </xpath>
+    </t>
+</templates>
